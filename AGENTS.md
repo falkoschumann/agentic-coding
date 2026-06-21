@@ -13,15 +13,15 @@ A web app to manage todos.
 
 ## Commands
 
-| Command | What it does |
-|---|---|
-| `bun run dev` | Start dev server |
-| `bun run build` | Production build |
-| `bun test` | Run all Vitest tests |
-| `bun run test:watch` | Run tests in watch mode |
-| `bun run lint` | Run linter |
-| `bun run typecheck` | Run TypeScript type checking |
-| `bun run ci` | Full CI pipeline: lint → typecheck → test → build |
+| Command              | What it does                                      |
+| -------------------- | ------------------------------------------------- |
+| `bun run dev`        | Start dev server                                  |
+| `bun run build`      | Production build                                  |
+| `bun test`           | Run all Vitest tests                              |
+| `bun run test:watch` | Run tests in watch mode                           |
+| `bun run lint`       | Run linter                                        |
+| `bun run typecheck`  | Run TypeScript type checking                      |
+| `bun run ci`         | Full CI pipeline: lint → typecheck → test → build |
 
 ## Conventions
 
