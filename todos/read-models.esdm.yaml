@@ -40,7 +40,7 @@ schema:
 ---
 apiVersion: schema.esdm.io/core/v1
 kind: query
-name: todos
+name: get-todos
 scope:
   domain: todos
   boundedContext: todos

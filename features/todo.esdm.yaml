@@ -1,6 +1,6 @@
 apiVersion: schema.esdm.io/given-when-then/v1
 kind: feature
-name: todo
+name: add-todo
 scope:
   domain: todos
   boundedContext: todos
