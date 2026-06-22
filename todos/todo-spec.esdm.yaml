@@ -1,0 +1,172 @@
+apiVersion: schema.esdm.io/given-when-then/v1
+kind: feature
+name: todo
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+scenarios:
+  - name: should-add-todo
+    when:
+      command: add
+      data:
+        title: foobar
+    then:
+      events:
+        - event: added
+          data:
+            id: 1
+            title: foobar
+            completed: false
+---
+apiVersion: schema.esdm.io/given-when-then/v1
+kind: feature
+name: toggle-all
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+scenarios:
+  - name: should-toggle-all
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+      - event: added
+        data:
+          id: 2
+          title: bar
+          completed: true
+    when:
+      command: toggle-all
+      data:
+        checked: true
+    then:
+      events:
+        - event: all-toggled
+          data:
+            checked: true
+---
+apiVersion: schema.esdm.io/given-when-then/v1
+kind: feature
+name: toggle
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+scenarios:
+  - name: should-toggle
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+      - event: added
+        data:
+          id: 2
+          title: bar
+          completed: true
+    when:
+      command: toggle
+      data:
+        id: 1
+    then:
+      events:
+        - event: toggled
+          data:
+            id: 1
+---
+apiVersion: schema.esdm.io/given-when-then/v1
+kind: feature
+name: destroy
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+scenarios:
+  - name: should-destroy
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+      - event: added
+        data:
+          id: 2
+          title: bar
+          completed: true
+    when:
+      command: destroy
+      data:
+        id: 2
+    then:
+      events:
+        - event: destroyed
+          data:
+            id: 2
+---
+apiVersion: schema.esdm.io/given-when-then/v1
+kind: feature
+name: save
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+scenarios:
+  - name: should-save
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+      - event: added
+        data:
+          id: 2
+          title: bar
+          completed: true
+    when:
+      command: save
+      data:
+        id: 1
+        title: lorem ipsum
+    then:
+      events:
+        - event: saved
+          data:
+            id: 1
+            title: lorem ipsum
+---
+apiVersion: schema.esdm.io/given-when-then/v1
+kind: feature
+name: clear-completed
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+scenarios:
+  - name: should-clear-completed
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+      - event: added
+        data:
+          id: 2
+          title: bar
+          completed: true
+    when:
+      command: clear-completed
+      data:
+        placeholder: null
+    then:
+      events:
+        - event: completed-cleared
+          data:
+            placeholder: null
