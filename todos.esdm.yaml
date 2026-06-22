@@ -1,0 +1,4 @@
+apiVersion: schema.esdm.io/core/v1
+kind: domain
+name: todos
+description: Manages a list of todos.

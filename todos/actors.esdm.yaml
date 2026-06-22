@@ -1,0 +1,15 @@
+apiVersion: schema.esdm.io/core/v1
+kind: bounded-context
+name: todos
+scope:
+  domain: todos
+---
+apiVersion: schema.esdm.io/core/v1
+kind: actor
+name: user
+scope:
+  domain: todos
+  boundedContext: todos
+type: human
+responsibilities:
+  - Want to manage his/her todos.

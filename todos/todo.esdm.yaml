@@ -1,0 +1,228 @@
+apiVersion: schema.esdm.io/core/v1
+kind: aggregate
+name: todo
+scope:
+  domain: todos
+  boundedContext: todos
+identifiedBy:
+  source: state
+  field: id
+state:
+  type: object
+  properties:
+    id:
+      type: string
+    title:
+      type: string
+    completed:
+      type: boolean
+  required:
+    - id
+    - title
+    - completed
+---
+apiVersion: schema.esdm.io/core/v1
+kind: command
+name: add
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    title:
+      type: string
+  required:
+    - title
+publishes:
+  - added
+actors:
+  - user
+---
+apiVersion: schema.esdm.io/core/v1
+kind: command
+name: toggle-all
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    checked:
+      type: boolean
+  required:
+    - checked
+publishes:
+  - all-toggled
+actors:
+  - user
+---
+apiVersion: schema.esdm.io/core/v1
+kind: command
+name: toggle
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    id:
+      type: string
+  required:
+    - id
+publishes:
+  - toggled
+actors:
+  - user
+---
+apiVersion: schema.esdm.io/core/v1
+kind: command
+name: destroy
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    id:
+      type: string
+  required:
+    - id
+publishes:
+  - destroyed
+actors:
+  - user
+---
+apiVersion: schema.esdm.io/core/v1
+kind: command
+name: save
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    id:
+      type: string
+    title:
+      type: string
+  required:
+    - id
+    - title
+publishes:
+  - saved
+actors:
+  - user
+---
+apiVersion: schema.esdm.io/core/v1
+kind: command
+name: clear-completed
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: null
+publishes:
+  - completed-cleared
+actors:
+  - user
+---
+apiVersion: schema.esdm.io/core/v1
+kind: event
+name: added
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    id:
+      type: string
+    title:
+      type: string
+    completed:
+      type: completed
+  required:
+    - id
+    - title
+    - completed
+---
+apiVersion: schema.esdm.io/core/v1
+kind: event
+name: all-toggled
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    checked:
+      type: boolean
+  required:
+    - checked
+---
+apiVersion: schema.esdm.io/core/v1
+kind: event
+name: toggled
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    id:
+      type: string
+  required:
+    - id
+---
+apiVersion: schema.esdm.io/core/v1
+kind: event
+name: destroyed
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    id:
+      type: string
+  required:
+    - id
+---
+apiVersion: schema.esdm.io/core/v1
+kind: event
+name: saved
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: object
+  properties:
+    id:
+      type: string
+    title:
+      type: string
+  required:
+    - id
+    - title
+---
+apiVersion: schema.esdm.io/core/v1
+kind: event
+name: completed-cleared
+scope:
+  domain: todos
+  boundedContext: todos
+  aggregate: todo
+data:
+  type: null

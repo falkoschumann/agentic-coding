@@ -1,0 +1,70 @@
+apiVersion: schema.esdm.io/core/v1
+kind: read-model
+name: todos
+scope:
+  domain: todos
+  boundedContext: todos
+projections:
+  - boundedContext: todos
+    aggregate: todo
+    event: added
+    rule: Add the todo.
+  - boundedContext: todos
+    aggregate: todo
+    event: all-toggled
+    rule: Update all todos with completed value.
+  - boundedContext: todos
+    aggregate: todo
+    event: toggled
+    rule: Toggle completed state of the todo.
+  - boundedContext: todos
+    aggregate: todo
+    event: destroyed
+    rule: Remove the todo.
+  - boundedContext: todos
+    aggregate: todo
+    event: saved
+    rule: Update the title of the todo.
+  - boundedContext: todos
+    aggregate: todo
+    event: completed-cleared
+    rule: Remove all completed todos.
+schema:
+  type: object
+  properties:
+    todos:
+      type: array
+      item: Todo
+  required:
+    - todos
+---
+apiVersion: schema.esdm.io/core/v1
+kind: query
+name: todos
+scope:
+  domain: todos
+  boundedContext: todos
+readModel: todos
+parameters:
+  type: object
+  properties:
+    showing:
+      type: string
+      enum:
+        - ALL_TODOS
+        - ACTIVE_TODOS
+        - COMPLETED_TODOS
+result:
+  type: object
+  properties:
+    todos:
+      type: array
+      item: Todo
+    activeTodoCount:
+      type: number
+    completedCount:
+      type: number
+  required:
+    - todos
+    - activeTodoCount
+    - completedCount
