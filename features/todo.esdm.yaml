@@ -164,9 +164,9 @@ scenarios:
     when:
       command: clear-completed
       data:
-        placeholder: null
+        payload: null
     then:
       events:
         - event: completed-cleared
           data:
-            placeholder: null
+            payload: null

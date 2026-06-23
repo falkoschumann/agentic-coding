@@ -1,4 +1,39 @@
+# see also https://gitignore.io
+
+# Common
+data/
+dist/
+!test/**/data/
+testdata/
+tmp/
+.env.local
+*.log*
+
+# Node
+coverage/
+node_modules/
+
+# Python
+.venv/
+__pycache__/
+
+# Eclipse
+.settings/
+bin/
+.project
+.classpath
+*.launch
+
+# IntelliJ IDEA
 .idea/
+out/
 *.iml
 
+# VS Code
 .vscode/
+
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
