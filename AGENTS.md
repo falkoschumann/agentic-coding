@@ -4,7 +4,9 @@ A web app to manage todos.
 
 ## Stack
 
-- **Framework:** React, React Router (declarative mode)
+- **Framework:** React
+- **Routing:** React Router with declarative mode
+- **Styling**: Bootstrap
 - **Language:** TypeScript
 - **Testing:** Vitest
 - **Package manager:** Bun
@@ -31,11 +33,15 @@ A web app to manage todos.
 
 ## Architecture notes
 
-- **Application services:** `/src/application` contains the imperative shell (asynchronous)
-- **Domain:** `/src/domain` contains the functional core (synchronous)
-- **Infrastructure:** `/src/infrastructure` contains the infrastructure adapter used by the application services (asynchronous)
+- **Application services:** `/src/application` contains the imperative shell
+  (object oriented and asynchronous)
+- **Domain:** `/src/domain` contains the functional core (functional and
+  synchronous)
+- **Infrastructure:** `/src/infrastructure` contains the infrastructure adapter
+  used by the application services (object oriented andasynchronous)
 - **UI:** `/src/ui` contains the user interface
-- **Tests:** use a separate source tree: `test/unit`, `test/integration` and `test/e2e`.
+- **Tests:** use a separate source tree: `test/unit`, `test/integration` and
+  `test/e2e`.
 
 ## Setup
 
