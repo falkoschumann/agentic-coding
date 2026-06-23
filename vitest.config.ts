@@ -21,6 +21,5 @@ export default defineConfig({
     },
     outputFile: "coverage/junit.xml",
     reporters: ["junit", "tree"],
-    setupFiles: ["./src/shared/polyfill.ts"],
   },
 });
