@@ -31,17 +31,27 @@ A web app to manage todos.
 - Use test driven development.
 - Implement an hexagonal architecture.
 
-## Architecture notes
+## Architecture Notes
+
+### Hexagonal Architecture
 
 - **Application services:** `/src/application` contains the imperative shell
-  (object oriented and asynchronous)
+  (object oriented and asynchronous); contains command handlers, query handlers,
+  process managers and event handlers
 - **Domain:** `/src/domain` contains the functional core (functional and
-  synchronous)
+  synchronous); contains aggregates, commands, read-models, queries and
+  value-objects
 - **Infrastructure:** `/src/infrastructure` contains the infrastructure adapter
-  used by the application services (object oriented andasynchronous)
+  used by the application services (object oriented andasynchronous); contains
+  repositories and gateways
 - **UI:** `/src/ui` contains the user interface
-- **Tests:** use a separate source tree: `test/unit`, `test/integration` and
-  `test/e2e`.
+
+### Tests Organization
+
+- Use a separate source tree `test` for all tests
+- Use `test/unit` for tests of the message handlers
+- Use `test/integration` for tests of repositories and gateways
+- Use `test/e2e` for UI tests
 
 ## Setup
 
