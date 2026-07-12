@@ -1,42 +1,7 @@
 {
-  "compilerOptions": {
-    // Type Checking
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strict": true,
-    "strictBindCallApply": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "useUnknownInCatchVariables": true,
-    // Modules
-    "allowImportingTsExtensions": false,
-    "module": "Preserve",
-    "moduleResolution": "bundler",
-    "noUncheckedSideEffectImports": true,
-    // Emit
-    "noEmit": true,
-    // JavaScript Support
-    "allowJs": true,
-    // Interop Constraints
-    "erasableSyntaxOnly": true,
-    "forceConsistentCasingInFileNames": true,
-    "verbatimModuleSyntax": true,
-    // Language and Environment
-    "jsx": "react-jsx",
-    "moduleDetection": "force",
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    // Projects
-    "lib": ["ESNext", "DOM"],
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.web.tsbuildinfo",
-    // Completeness
-    "skipLibCheck": true
-  },
-  "exclude": ["coverage", "dist", "node_modules"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

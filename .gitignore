@@ -6,7 +6,7 @@ dist/
 !test/**/data/
 testdata/
 tmp/
-.env.local
+*.local
 *.log*
 
 # Node

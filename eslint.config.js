@@ -1,4 +1,4 @@
-// Copyright (c) 2025 Falko Schumann. All rights reserved. MIT license.
+// Copyright (c) 2026 Falko Schumann. All rights reserved. MIT license.
 
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
@@ -10,14 +10,14 @@ import globals from "globals";
 import ts from "typescript-eslint";
 
 export default defineConfig(
-  { ignores: [".venv", "coverage", "dist", "out", "tmp"] },
+  { ignores: ["coverage", "dist"] },
   {
     extends: [js.configs.recommended, ts.configs.recommended],
     files: ["**/*.{cjs,mjs,js,jsx,ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2023,
       globals: {
-        ...globals.es2024,
+        ...globals.es2023,
         ...globals.browser,
       },
       parserOptions: {
