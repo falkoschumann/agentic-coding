@@ -6,7 +6,7 @@ export const config: SheriffConfig = {
   autoTagging: false,
   enableBarrelLess: true,
   barrelFileName: "mod.ts",
-  entryFile: "src/index.ts",
+  entryFile: "src/main.tsx",
   modules: {
     src: ["layer:entry"],
     "src/application": ["layer:application"],
