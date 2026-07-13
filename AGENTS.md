@@ -137,8 +137,8 @@ artifacts.
   not be renamed or repurposed in domain or application contracts.
 - Read models map to explicit projection modules, and queries map to dedicated
   query handlers.
-- Actors from ESDM map to authorization/interaction constraints in application
-  services and tests.
+- Actors from ESDM are documentation-only in this project. They describe
+  responsibilities and domain language but do not define runtime authorization.
 - Given-When-Then scenarios map 1:1 to test cases with scenario names preserved
   or minimally adapted.
 - If an ESDM document defines required fields, corresponding code contracts must
@@ -151,6 +151,17 @@ artifacts.
 
 - Use ESDM vocabulary as the default naming source for modules, handlers, DTOs,
   and test cases.
+- Required implementation structure:
+    - `src/application` for command/query handlers, process managers, and
+      orchestration services
+    - `src/domain` for aggregates, value objects, domain rules, and pure domain
+      functions
+    - `src/infrastructure` for adapters, repositories, gateways, and external
+      integrations
+    - `src/ui` for UI components, routes, and user interactions
+    - `test/unit` for application/service tests
+    - `test/integration` for adapter and gateway integration tests
+    - `test/e2e` for end-to-end UI flow tests
 - Keep one clear file ownership per concept:
     - aggregate behavior in domain aggregate modules
     - orchestration in application handlers/services
@@ -270,9 +281,8 @@ stay concise, non-duplicative, and enforceable.
   avoid ambiguous wording such as should when a gate is mandatory.
 - Keep section order stable: Scope and Sources, Delivery Rules, Architecture
   Rules, Mapping Rules, Quality Gates, UI Standards, then Reference Notes.
-- If Architecture Notes repeat enforceable rules from earlier sections, keep the
-  enforceable rule once and reduce Architecture Notes to explanatory context
-  only.
+- If explanatory text repeats enforceable rules from earlier sections, keep the
+  enforceable rule once and keep explanatory text as non-normative context only.
 - Every new policy must include a verification path (for example command, test
   type, or review checklist item).
 - Any repository change that updates behavior must be reflected in exactly one
@@ -293,29 +303,3 @@ stay concise, non-duplicative, and enforceable.
   precedence over informal interpretation.
 - If two rules conflict, resolve the conflict in this file before merging
   implementation changes.
-
-## Architecture Notes
-
-This section is explanatory only. Enforceable requirements are defined in:
-
-- Hexagonal Architecture Rules
-- Allowed Dependency Matrix
-- DDD to Code Mapping Rules
-- Mandatory Quality Gates
-
-### Hexagonal Architecture
-
-- **Application services (`/src/application`)**: Command/query handlers, process
-  managers, and event handlers that orchestrate use cases.
-- **Domain (`/src/domain`)**: Aggregates, commands, read-models, queries, and
-  value objects.
-- **Infrastructure (`/src/infrastructure`)**: Adapters for persistence and
-  external systems.
-- **UI (`/src/ui`)**: User-facing components that invoke application use cases.
-
-### Tests Organization
-
-- Use a separate source tree `test` for all tests.
-- Use `test/unit` for tests of the application services.
-- Use `test/integration` for tests of repositories and gateways.
-- Use `test/e2e` for UI tests.
