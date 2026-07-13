@@ -18,7 +18,7 @@ distclean: clean
 dist: build
 
 start: prepare
-	$(PM) run $(RUN_OPTIONS) preview
+	$(PM) run $(RUN_OPTIONS) vite preview
 
 domain:
 	esdm view
@@ -39,13 +39,13 @@ fix:
 	$(RUN) $(RUN_OPTIONS) prettier --write .
 
 dev: prepare
-	$(PM) run $(RUN_OPTIONS) dev
+	$(PM) run $(RUN_OPTIONS) vite
 
 test: prepare
-	$(PM) run $(RUN_OPTIONS) test
+	$(PM) run $(RUN_OPTIONS) vitest run
 
 watch: prepare
-	$(PM) run $(RUN_OPTIONS) watch
+	$(PM) run $(RUN_OPTIONS) vitest watch
 
 unit-tests: prepare
 	$(RUN) $(RUN_OPTIONS) vitest run unit
@@ -57,7 +57,8 @@ e2e-tests: prepare
 	$(RUN) $(RUN_OPTIONS) vitest run e2e
 
 build: prepare
-	$(PM) run $(RUN_OPTIONS) build
+	$(PM) run $(RUN_OPTIONS) tsc -b
+	$(PM) run $(RUN_OPTIONS) vite build
 
 prepare: version
 ifdef CI

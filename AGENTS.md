@@ -15,47 +15,38 @@ A web app to manage todos.
 
 ## Commands
 
-| Command              | What it does                                      |
-| -------------------- | ------------------------------------------------- |
-| `bun run dev`        | Start dev server                                  |
-| `bun run build`      | Production build                                  |
-| `bun test`           | Run all Vitest tests                              |
-| `bun run test:watch` | Run tests in watch mode                           |
-| `bun run lint`       | Run linter                                        |
-| `bun run typecheck`  | Run TypeScript type checking                      |
-| `bun run ci`         | Full CI pipeline: lint → typecheck → test → build |
+| Command      | What it does                                |
+| ------------ | ------------------------------------------- |
+| `make`       | Run full build with all checks              |
+| `make build` | Run only the build                          |
+| `make test`  | Run all tests                               |
+| `make check` | Run all checks, linting and tests           |
+| `make fix`   | Fix most of the issues found by `make check |
 
 ## Conventions
 
 - Use domain-driven design specified by esdm yaml files (schemas `/schemas`).
-- Use test driven development.
+- Use test driven development. Implement only one scenario after another from
+  `/features`.
 - Implement an hexagonal architecture.
 
 ## Architecture Notes
 
 ### Hexagonal Architecture
 
-- **Application services:** `/src/application` contains the imperative shell
-  (object oriented and asynchronous); contains command handlers, query handlers,
-  process managers and event handlers
-- **Domain:** `/src/domain` contains the functional core (functional and
-  synchronous); contains aggregates, commands, read-models, queries and
-  value-objects
-- **Infrastructure:** `/src/infrastructure` contains the infrastructure adapter
-  used by the application services (object oriented andasynchronous); contains
-  repositories and gateways
-- **UI:** `/src/ui` contains the user interface
+- **Application services:** `/src/application` contains command handlers, query
+  handlers, process managers and event handlers. Orchestrate domain and
+  infrastructure. Use object oriented code style and an asynchronous API.
+- **Domain:** `/src/domain` contains aggregates, commands, read-models, queries
+  and value-objects. Use functional code style and a synchronous API.
+- **Infrastructure:** `/src/infrastructure` contains repositories and gateways
+  to external systems. Use object oriented code style and an asynchronous API.
+- **UI:** `/src/ui` contains the user interface and use the application services
+  to provide features.
 
 ### Tests Organization
 
-- Use a separate source tree `test` for all tests
-- Use `test/unit` for tests of the message handlers
-- Use `test/integration` for tests of repositories and gateways
-- Use `test/e2e` for UI tests
-
-## Setup
-
-```bash
-bun install
-bun run dev
-```
+- Use a separate source tree `test` for all tests.
+- Use `test/unit` for tests of the application services.
+- Use `test/integration` for tests of repositories and gateways.
+- Use `test/e2e` for UI tests.

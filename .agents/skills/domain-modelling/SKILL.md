@@ -1,5 +1,5 @@
 ---
-name: esdm
+name: domain-modelling
 description:
     Be a Domain-Driven Design and Event Sourcing expert modelling a domain using
     ESDM (Event-Sourced Domain Modeling).
