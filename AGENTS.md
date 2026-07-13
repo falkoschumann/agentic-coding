@@ -28,15 +28,15 @@ A web app to manage todos.
 - Use domain-driven design specified by esdm yaml files (schemas `/schemas`).
 - Use test driven development. Implement only one scenario after another from
   `/features`.
-- Implement an hexagonal architecture.
+- Implement a hexagonal architecture.
 
 ### Source of Truth for Domain Behavior
 
 Commands, queries, aggregates, read models, and events must be derived from the
 ESDM core models. Features and acceptance criteria must be derived from the
 Given-When-Then feature specifications. The authoritative files are
-`todo.esdm.yaml`, `read-models.esdm.yaml`, `todo.esdm.yaml`, and
-`get-todos.esdm.yaml`.
+`todos/todo.esdm.yaml`, `todos/read-models.esdm.yaml`,
+`features/todo.esdm.yaml`, and `features/get-todos.esdm.yaml`.
 
 ### Implementation Order
 
@@ -296,17 +296,22 @@ stay concise, non-duplicative, and enforceable.
 
 ## Architecture Notes
 
+This section is explanatory only. Enforceable requirements are defined in:
+
+- Hexagonal Architecture Rules
+- Allowed Dependency Matrix
+- DDD to Code Mapping Rules
+- Mandatory Quality Gates
+
 ### Hexagonal Architecture
 
-- **Application services:** `/src/application` contains command handlers, query
-  handlers, process managers and event handlers. Orchestrate domain and
-  infrastructure. Use object oriented code style and an asynchronous API.
-- **Domain:** `/src/domain` contains aggregates, commands, read-models, queries
-  and value-objects. Use functional code style and a synchronous API.
-- **Infrastructure:** `/src/infrastructure` contains repositories and gateways
-  to external systems. Use object oriented code style and an asynchronous API.
-- **UI:** `/src/ui` contains the user interface and use the application services
-  to provide features.
+- **Application services (`/src/application`)**: Command/query handlers, process
+  managers, and event handlers that orchestrate use cases.
+- **Domain (`/src/domain`)**: Aggregates, commands, read-models, queries, and
+  value objects.
+- **Infrastructure (`/src/infrastructure`)**: Adapters for persistence and
+  external systems.
+- **UI (`/src/ui`)**: User-facing components that invoke application use cases.
 
 ### Tests Organization
 
