@@ -23,7 +23,7 @@ A web app to manage todos.
 | `make check` | Run all checks, linting and tests            |
 | `make fix`   | Fix most of the issues found by `make check` |
 
-## Conventions
+## Scope and Sources
 
 - Use domain-driven design as specified by ESDM YAML files (schemas `/schemas`).
 - Use test-driven development. Implement one scenario at a time from
@@ -56,6 +56,8 @@ changes, run `esdm lint`.
 Names in code, tests, and UI must align with the vocabulary defined in
 `schemas/core/v1.yaml` and `schemas/given-when-then/v1.yaml`.
 
+## Delivery Rules
+
 ### Definition of Done
 
 A feature scenario is done only if all of the following are true:
@@ -76,6 +78,8 @@ A feature scenario is done only if all of the following are true:
   first and validated with `esdm lint` before finalizing code changes.
 - No unrelated behavior regressions are introduced in UI, application, domain,
   or infrastructure layers.
+
+## Architecture Rules
 
 ### Hexagonal Architecture Rules
 
@@ -118,6 +122,8 @@ boundaries.
 - Domain → Infrastructure: forbidden
 - Infrastructure → Application: allowed (to implement ports)
 - Infrastructure → Domain: allowed (to map and persist domain state)
+
+## Mapping Rules
 
 ### DDD to Code Mapping Rules
 
@@ -185,6 +191,8 @@ artifacts.
 - Feature scenarios and tests must be added or updated to cover versioned
   behavior before old versions are removed.
 
+## Quality Gates
+
 ### Runtime and Delivery Baseline
 
 The project must run with pinned and documented toolchain versions.
@@ -228,6 +236,8 @@ A release candidate is valid only if the repository is in a fully green state.
 - No unresolved schema or model validation issues remain.
 - No known regressions in implemented scenarios are open.
 
+## UI Standards
+
 ### UI and UX Implementation Standards
 
 The UI layer must provide consistent behavior, accessibility, and responsiveness
@@ -269,6 +279,8 @@ across all todo scenarios.
   movement, keyboard interaction, visible labels).
 - Regression tests must be added for every fixed UI bug before the fix is
   merged.
+
+## Governance
 
 ### Document Structure and Maintenance
 
