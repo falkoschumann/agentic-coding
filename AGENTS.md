@@ -25,8 +25,8 @@ A web app to manage todos.
 
 ## Conventions
 
-- Use domain-driven design specified by esdm yaml files (schemas `/schemas`).
-- Use test driven development. Implement only one scenario after another from
+- Use domain-driven design as specified by ESDM YAML files (schemas `/schemas`).
+- Use test-driven development. Implement one scenario at a time from
   `/features`.
 - Implement a hexagonal architecture.
 
@@ -132,13 +132,13 @@ artifacts.
     - event application functions
     - invariant checks
 - Commands and queries must keep their ESDM names in code (kebab-case in model,
-  project-consistent code naming in TypeScript).
+  project-consistent TypeScript naming conventions).
 - Events must keep their ESDM names and payload shape. Event payload fields must
   not be renamed or repurposed in domain or application contracts.
 - Read models map to explicit projection modules, and queries map to dedicated
   query handlers.
 - Actors from ESDM are documentation-only in this project. They describe
-  responsibilities and domain language but do not define runtime authorization.
+  responsibilities and domain language but do not define runtime permissions.
 - Given-When-Then scenarios map 1:1 to test cases with scenario names preserved
   or minimally adapted.
 - If an ESDM document defines required fields, corresponding code contracts must
@@ -280,7 +280,7 @@ stay concise, non-duplicative, and enforceable.
 - Prefer normative language for requirements: use must, must not, and required;
   avoid ambiguous wording such as should when a gate is mandatory.
 - Keep section order stable: Scope and Sources, Delivery Rules, Architecture
-  Rules, Mapping Rules, Quality Gates, UI Standards, then Reference Notes.
+  Rules, Mapping Rules, Quality Gates, UI Standards, then Governance.
 - If explanatory text repeats enforceable rules from earlier sections, keep the
   enforceable rule once and keep explanatory text as non-normative context only.
 - Every new policy must include a verification path (for example command, test
