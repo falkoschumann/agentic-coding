@@ -35,7 +35,8 @@ schema:
     todos:
       type: array
       items:
-        type: Todo
+        type: object
+        $comment: esdm-ref:todos/todos/aggregate/todo#state
   required:
     - todos
 ---
@@ -61,7 +62,8 @@ result:
     todos:
       type: array
       items:
-        type: Todo
+        type: object
+        $comment: esdm-ref:todos/todos/aggregate/todo#state
     activeTodoCount:
       type: number
     completedCount:
