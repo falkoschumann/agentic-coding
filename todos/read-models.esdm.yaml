@@ -34,7 +34,8 @@ schema:
   properties:
     todos:
       type: array
-      item: Todo
+      items:
+        type: Todo
   required:
     - todos
 ---
@@ -59,7 +60,8 @@ result:
   properties:
     todos:
       type: array
-      item: Todo
+      items:
+        type: Todo
     activeTodoCount:
       type: number
     completedCount:
