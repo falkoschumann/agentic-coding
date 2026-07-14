@@ -4,6 +4,7 @@ PM_OPTIONS?=--ignore-scripts
 RUN?=bunx
 RUN_OPTIONS?=--bun
 SHELL:=/bin/bash
+DEPENDENCY_UPDATER=dependabot[bot]
 
 all: dist check
 
@@ -62,8 +63,13 @@ build: prepare
 
 prepare: version
 ifdef CI
+ifeq ($(findstring $(DEPENDENCY_UPDATER), $(GITHUB_ACTOR)), $(DEPENDENCY_UPDATER))
+	@echo "dependency updater detected, run $(PM) install"
+	$(PM) install $(PM_OPTIONS)
+else
 	@echo "CI detected, run $(PM) ci"
 	$(PM) ci $(PM_OPTIONS)
+endif
 else
 	$(PM) install $(PM_OPTIONS)
 endif

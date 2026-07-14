@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    env:
+      TZ: "Europe/Berlin"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v7
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: |
+          curl "https://esdm.s3.fr-par.scw.cloud/0.14.0/esdm-linux-amd64" --fail --output /usr/local/bin/esdm
+          chmod a+x /usr/local/bin/esdm
+      - name: Build
+        run: make
