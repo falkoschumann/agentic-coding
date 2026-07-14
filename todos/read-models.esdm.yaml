@@ -70,3 +70,5 @@ result:
     - todos
     - activeTodoCount
     - completedCount
+actors:
+  - user
