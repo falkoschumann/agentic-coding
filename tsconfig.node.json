@@ -16,8 +16,8 @@
     "useUnknownInCatchVariables": true,
     // Modules
     "allowImportingTsExtensions": false,
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "noUncheckedSideEffectImports": true,
     "types": ["node"],
     // Emit
