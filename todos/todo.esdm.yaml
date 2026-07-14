@@ -20,6 +20,11 @@ state:
     - id
     - title
     - completed
+invariants:
+  - name: title-must-not-be-empty
+    rule: A todo title must not be empty or whitespace-only.
+  - name: todo-must-exist
+    rule: Commands toggle, save, and destroy require that the referenced todo id already exists.
 ---
 apiVersion: schema.esdm.io/core/v1
 kind: command

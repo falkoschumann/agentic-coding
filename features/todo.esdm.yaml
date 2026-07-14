@@ -18,6 +18,22 @@ scenarios:
             id: 1
             title: foobar
             completed: false
+  - name: should-reject-add-todo-with-empty-title
+    when:
+      command: add
+      data:
+        title: ""
+    then:
+      rejection:
+        invariant: title-must-not-be-empty
+  - name: should-reject-add-todo-with-whitespace-title
+    when:
+      command: add
+      data:
+        title: "   "
+    then:
+      rejection:
+        invariant: title-must-not-be-empty
 ---
 apiVersion: schema.esdm.io/given-when-then/v1
 kind: feature
@@ -78,6 +94,20 @@ scenarios:
         - event: toggled
           data:
             id: 1
+  - name: should-reject-toggle-for-unknown-id
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+    when:
+      command: toggle
+      data:
+        id: 2
+    then:
+      rejection:
+        invariant: todo-must-exist
 ---
 apiVersion: schema.esdm.io/given-when-then/v1
 kind: feature
@@ -108,6 +138,20 @@ scenarios:
         - event: destroyed
           data:
             id: 2
+  - name: should-reject-destroy-for-unknown-id
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+    when:
+      command: destroy
+      data:
+        id: 2
+    then:
+      rejection:
+        invariant: todo-must-exist
 ---
 apiVersion: schema.esdm.io/given-when-then/v1
 kind: feature
@@ -140,6 +184,36 @@ scenarios:
           data:
             id: 1
             title: lorem ipsum
+  - name: should-reject-save-with-empty-title
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+    when:
+      command: save
+      data:
+        id: 1
+        title: ""
+    then:
+      rejection:
+        invariant: title-must-not-be-empty
+  - name: should-reject-save-for-unknown-id
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+    when:
+      command: save
+      data:
+        id: 2
+        title: lorem ipsum
+    then:
+      rejection:
+        invariant: todo-must-exist
 ---
 apiVersion: schema.esdm.io/given-when-then/v1
 kind: feature
