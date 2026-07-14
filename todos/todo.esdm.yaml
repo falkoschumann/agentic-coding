@@ -11,7 +11,7 @@ state:
   type: object
   properties:
     id:
-      type: string
+      type: number
     title:
       type: string
     completed:
@@ -70,7 +70,7 @@ data:
   type: object
   properties:
     id:
-      type: string
+      type: number
   required:
     - id
 publishes:
@@ -89,7 +89,7 @@ data:
   type: object
   properties:
     id:
-      type: string
+      type: number
   required:
     - id
 publishes:
@@ -108,7 +108,7 @@ data:
   type: object
   properties:
     id:
-      type: string
+      type: number
     title:
       type: string
   required:
@@ -144,11 +144,11 @@ data:
   type: object
   properties:
     id:
-      type: string
+      type: number
     title:
       type: string
     completed:
-      type: completed
+      type: boolean
   required:
     - id
     - title
@@ -180,7 +180,7 @@ data:
   type: object
   properties:
     id:
-      type: string
+      type: number
   required:
     - id
 ---
@@ -195,7 +195,7 @@ data:
   type: object
   properties:
     id:
-      type: string
+      type: number
   required:
     - id
 ---
@@ -210,7 +210,7 @@ data:
   type: object
   properties:
     id:
-      type: string
+      type: number
     title:
       type: string
   required:
