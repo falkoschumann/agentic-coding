@@ -163,10 +163,8 @@ scenarios:
           completed: true
     when:
       command: clear-completed
-      data:
-        payload: null
+      data: {}
     then:
       events:
         - event: completed-cleared
-          data:
-            payload: null
+          data: {}
