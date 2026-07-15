@@ -5,6 +5,14 @@
   "license": "MIT",
   "author": "Falko Schumann",
   "type": "module",
+  "scripts": {
+    "start": "vite",
+    "test": "vitest run",
+    "build": "tsc -b && vite build",
+    "lint": "eslint . && stylelint \"**/*.css\" --ignore-path .gitignore && prettier --check .",
+    "lint:fix": "eslint --fix . && stylelint \"**/*.css\" --fix --ignore-path .gitignore && prettier --write .",
+    "lint:arch": "sheriff verify"
+  },
   "dependencies": {
     "bootstrap": "5.3.8",
     "bootstrap-icons": "1.13.1",
