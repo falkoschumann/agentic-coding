@@ -18,6 +18,24 @@ scenarios:
             id: 1
             title: foobar
             completed: false
+  - name: should-auto-increment-todo-id
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+    when:
+      command: add
+      data:
+        title: bar
+    then:
+      events:
+        - event: added
+          data:
+            id: 2
+            title: bar
+            completed: false
   - name: should-reject-add-todo-with-empty-title
     when:
       command: add
@@ -196,6 +214,21 @@ scenarios:
       data:
         id: 1
         title: ""
+    then:
+      rejection:
+        invariant: title-must-not-be-empty
+  - name: should-reject-save-with-whitespace-title
+    given:
+      - event: added
+        data:
+          id: 1
+          title: foo
+          completed: false
+    when:
+      command: save
+      data:
+        id: 1
+        title: "   "
     then:
       rejection:
         invariant: title-must-not-be-empty

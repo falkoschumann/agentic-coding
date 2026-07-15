@@ -24,7 +24,7 @@ invariants:
   - name: title-must-not-be-empty
     rule: A todo title must not be empty or whitespace-only.
   - name: todo-must-exist
-    rule: Commands toggle, save, and destroy require that the referenced todo id already exists.
+    rule: Commands that reference a todo id require that the todo already exists.
 ---
 apiVersion: schema.esdm.io/core/v1
 kind: command
@@ -132,7 +132,7 @@ scope:
   boundedContext: todos
   aggregate: todo
 data:
-  type: null
+  type: {}
 publishes:
   - completed-cleared
 actors:
@@ -230,4 +230,4 @@ scope:
   boundedContext: todos
   aggregate: todo
 data:
-  type: null
+  type: {}
