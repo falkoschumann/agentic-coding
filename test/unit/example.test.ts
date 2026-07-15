@@ -2,7 +2,7 @@
 
 import { describe, it, expect } from "vitest";
 
-describe("Nothing", () => {
+describe("Example", () => {
   it("should do nothing", () => {
     expect(true).toBe(true);
   });
