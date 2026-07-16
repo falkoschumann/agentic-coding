@@ -34,7 +34,8 @@ This is a a web application for managing todos.
 - A slice includes a command or query, the tests for the feature and the UI
   using the command or query.
 - Implement exactly one scenario at a time from the feature files.
-- Start with a test based on the scenario, then implement, then refactor.
+- A failing test for the scenario is written first, then implementation is
+  added, then refactoring is performed.
 - A scenario is only considered complete when the build is successfully, all
   related tests pass, the linter runs without issue and the architecture rules
   are being followed.
