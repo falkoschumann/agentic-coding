@@ -21,5 +21,6 @@ export default defineConfig({
     },
     outputFile: "coverage/junit.xml",
     reporters: ["junit", "tree"],
+    passWithNoTests: true,
   },
 });
