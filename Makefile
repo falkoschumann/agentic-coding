@@ -6,7 +6,7 @@ RUN_OPTIONS?=--bun
 SHELL:=/bin/bash
 DEPENDENCY_UPDATER=dependabot[bot]
 
-all: dist check
+all: dist check e2e-tests
 
 clean:
 	rm -rf coverage
@@ -55,7 +55,7 @@ integration-tests: prepare
 	$(RUN) $(RUN_OPTIONS) vitest run integration
 
 e2e-tests: prepare
-	$(RUN) $(RUN_OPTIONS) vitest run e2e
+	$(RUN) $(RUN_OPTIONS) playwright test
 
 build: prepare
 	$(PM) run $(RUN_OPTIONS) tsc -b

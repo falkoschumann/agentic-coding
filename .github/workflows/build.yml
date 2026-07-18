@@ -24,5 +24,13 @@ jobs:
         run: |
           curl "https://esdm.s3.fr-par.scw.cloud/0.14.0/esdm-linux-amd64" --fail --output /usr/local/bin/esdm
           chmod a+x /usr/local/bin/esdm
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Build
         run: make
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
