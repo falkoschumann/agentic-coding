@@ -230,4 +230,11 @@ scope:
   boundedContext: todos
   aggregate: todo
 data:
-  type: {}
+  type: object
+  properties:
+    ids:
+      type: array
+      items:
+        type: number
+  required:
+    - ids

@@ -94,3 +94,6 @@ result:
     - completedCount
 actors:
   - user
+constraints:
+  - name: filter-by-state
+    rule: Filter todos by state showing.
