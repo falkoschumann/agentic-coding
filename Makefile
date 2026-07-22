@@ -43,7 +43,7 @@ dev: prepare
 	$(PM) run $(RUN_OPTIONS) vite
 
 test: prepare
-	$(PM) run $(RUN_OPTIONS) vitest run
+	$(PM) run $(RUN_OPTIONS) vitest run --coverage
 
 watch: prepare
 	$(PM) run $(RUN_OPTIONS) vitest watch
