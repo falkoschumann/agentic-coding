@@ -120,3 +120,13 @@ scenarios:
             completed: true
         activeTodoCount: 1
         completedCount: 2
+  - name: should-return-no-todos-when-none-exist
+    when:
+      query: get-todos
+      parameters:
+        showing: ALL_TODOS
+    then:
+      result:
+        todos:
+        activeTodoCount: 0
+        completedCount: 0
