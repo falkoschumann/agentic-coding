@@ -8,3 +8,12 @@ export interface TodoDestroyedEvent {
 export type TodoDestroyedEventData = Readonly<{
   readonly id: number;
 }>;
+
+export function createTodoDestroyed(
+  data: TodoDestroyedEventData,
+): TodoDestroyedEvent {
+  return {
+    type: "todo-destroyed",
+    data,
+  };
+}

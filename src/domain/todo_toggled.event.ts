@@ -7,4 +7,14 @@ export interface TodoToggledEvent {
 
 export type TodoToggledEventData = Readonly<{
   readonly id: number;
+  readonly completed: boolean;
 }>;
+
+export function createTodoToggled(
+  data: TodoToggledEventData,
+): TodoToggledEvent {
+  return {
+    type: "todo-toggled",
+    data,
+  };
+}

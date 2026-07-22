@@ -10,3 +10,10 @@ export type TodoAddedEventData = Readonly<{
   readonly title: string;
   readonly completed: boolean;
 }>;
+
+export function createTodoAdded(data: TodoAddedEventData): TodoAddedEvent {
+  return {
+    type: "todo-added",
+    data,
+  };
+}

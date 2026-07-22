@@ -8,3 +8,10 @@ export interface AllToggledEvent {
 export type AllToggledEventData = Readonly<{
   readonly checked: boolean;
 }>;
+
+export function createAllToggled(data: AllToggledEventData): AllToggledEvent {
+  return {
+    type: "all-toggled",
+    data,
+  };
+}

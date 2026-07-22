@@ -9,3 +9,10 @@ export type TodoSavedEventData = Readonly<{
   readonly id: number;
   readonly title: string;
 }>;
+
+export function createTodoSaved(data: TodoSavedEventData): TodoSavedEvent {
+  return {
+    type: "todo-saved",
+    data,
+  };
+}
