@@ -85,13 +85,13 @@ scenarios:
 ---
 apiVersion: schema.esdm.io/given-when-then/v1
 kind: feature
-name: toggle
+name: toggle-todo
 scope:
   domain: todos
   boundedContext: todos
   aggregate: todo
 scenarios:
-  - name: should-toggle
+  - name: should-toggle-todo
     given:
       - event: added
         data:
@@ -112,6 +112,7 @@ scenarios:
         - event: toggled
           data:
             id: 1
+            completed: true
   - name: should-reject-toggle-for-unknown-id
     given:
       - event: added
@@ -129,13 +130,13 @@ scenarios:
 ---
 apiVersion: schema.esdm.io/given-when-then/v1
 kind: feature
-name: destroy
+name: destroy-todo
 scope:
   domain: todos
   boundedContext: todos
   aggregate: todo
 scenarios:
-  - name: should-destroy
+  - name: should-destroy-todo
     given:
       - event: added
         data:
@@ -173,13 +174,13 @@ scenarios:
 ---
 apiVersion: schema.esdm.io/given-when-then/v1
 kind: feature
-name: save
+name: save-todo
 scope:
   domain: todos
   boundedContext: todos
   aggregate: todo
 scenarios:
-  - name: should-save
+  - name: should-save-todo
     given:
       - event: added
         data:
@@ -274,4 +275,6 @@ scenarios:
     then:
       events:
         - event: completed-cleared
-          data: {}
+          data:
+            ids:
+              - 2

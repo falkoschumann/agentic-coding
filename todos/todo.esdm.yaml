@@ -186,8 +186,11 @@ data:
   properties:
     id:
       type: number
+    completed:
+      type: boolean
   required:
     - id
+    - completed
 ---
 apiVersion: schema.esdm.io/core/v1
 kind: event
