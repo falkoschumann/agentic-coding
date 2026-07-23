@@ -18,6 +18,7 @@ export default defineConfig({
         branches: 85,
       },
     },
+    environment: "jsdom",
     exclude: ["**/node_modules/**", "**/dist/**", "**/test/e2e/**"],
     outputFile: "coverage/junit.xml",
     reporters: ["junit", "tree"],
