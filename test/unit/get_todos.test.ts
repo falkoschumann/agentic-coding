@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import type { TodoState } from "../../src/domain/todo.aggregate";
+import { createTodo, type TodoState } from "../../src/domain/todo.aggregate";
 import {
   createGetTodosQuery,
   createGetTodosQueryResult,
@@ -11,22 +11,21 @@ import {
 
 describe("Get todos", () => {
   it("should show all todos", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "a",
         completed: true,
-      },
-      {
+      }),
+      createTodo({
         id: 2,
         title: "b",
         completed: true,
-      },
-      {
+      }),
+      createTodo({
         id: 3,
         title: "c",
-        completed: false,
-      },
+      }),
     ];
 
     const query = createGetTodosQuery({ showing: "all" });
@@ -42,22 +41,21 @@ describe("Get todos", () => {
   });
 
   it("should show active todos", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "a",
         completed: true,
-      },
-      {
+      }),
+      createTodo({
         id: 2,
         title: "b",
         completed: true,
-      },
-      {
+      }),
+      createTodo({
         id: 3,
         title: "c",
-        completed: false,
-      },
+      }),
     ];
 
     const query = createGetTodosQuery({ showing: "active" });
@@ -79,22 +77,21 @@ describe("Get todos", () => {
   });
 
   it("should show completed todos", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "a",
         completed: true,
-      },
-      {
+      }),
+      createTodo({
         id: 2,
         title: "b",
         completed: true,
-      },
-      {
+      }),
+      createTodo({
         id: 3,
         title: "c",
-        completed: false,
-      },
+      }),
     ];
 
     const query = createGetTodosQuery({ showing: "completed" });

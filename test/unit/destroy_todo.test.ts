@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import type { TodoState } from "../../src/domain/todo.aggregate";
+import { createTodo, type TodoState } from "../../src/domain/todo.aggregate";
 import {
   createDestroyTodo,
   destroyTodo,
@@ -11,17 +11,16 @@ import { createTodoDestroyed } from "../../src/domain/todo_destroyed.event";
 
 describe("Destroy todo", () => {
   it("should destroy todo", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
-        completed: false,
-      },
-      {
+      }),
+      createTodo({
         id: 2,
         title: "bar",
         completed: true,
-      },
+      }),
     ];
 
     const command = createDestroyTodo({ id: 2 });
@@ -32,11 +31,10 @@ describe("Destroy todo", () => {
 
   it("should reject destroy for unknown id", () => {
     const state: TodoState[] = [
-      {
+      createTodo({
         id: 1,
         title: "foo",
-        completed: false,
-      },
+      }),
     ];
 
     const command = createDestroyTodo({ id: 2 });

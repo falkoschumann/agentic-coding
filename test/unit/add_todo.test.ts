@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import type { TodoState } from "../../src/domain/todo.aggregate";
+import { createTodo, type TodoState } from "../../src/domain/todo.aggregate";
 import { addTodo, createAddTodo } from "../../src/domain/add_todo.command";
 import { createTodoAdded } from "../../src/domain/todo_added.event";
 
@@ -19,12 +19,11 @@ describe("Add todo", () => {
   });
 
   it("should auto increment todo ID", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
-        completed: false,
-      },
+      }),
     ];
 
     const command = createAddTodo({ title: "bar" });

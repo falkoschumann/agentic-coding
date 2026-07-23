@@ -2,23 +2,23 @@
 
 import { describe, expect, it } from "vitest";
 
-import type { TodoState } from "../../src/domain/todo.aggregate";
+import { createTodo } from "../../src/domain/todo.aggregate";
 import { saveTodo, createSaveTodo } from "../../src/domain/save_todo.command";
 import { createTodoSaved } from "../../src/domain/todo_saved.event";
 
 describe("Save todo", () => {
   it("should save todo", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
         completed: false,
-      },
-      {
+      }),
+      createTodo({
         id: 2,
         title: "bar",
         completed: true,
-      },
+      }),
     ];
 
     const command = createSaveTodo({ id: 1, title: "lorem ipsum" });
@@ -28,12 +28,12 @@ describe("Save todo", () => {
   });
 
   it("should reject save with empty title", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
         completed: false,
-      },
+      }),
     ];
 
     const command = createSaveTodo({ id: 1, title: "" });
@@ -43,12 +43,12 @@ describe("Save todo", () => {
   });
 
   it("should reject save with whitespace title", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
         completed: false,
-      },
+      }),
     ];
 
     const command = createSaveTodo({ id: 1, title: "   " });
@@ -58,12 +58,11 @@ describe("Save todo", () => {
   });
 
   it("should reject save for unknown id", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
-        completed: false,
-      },
+      }),
     ];
 
     const command = createSaveTodo({ id: 2, title: "lorem ipsum" });

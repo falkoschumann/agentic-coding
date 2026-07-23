@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import type { TodoState } from "../../src/domain/todo.aggregate";
+import { createTodo } from "../../src/domain/todo.aggregate";
 import {
   toggleTodo,
   createToggleTodo,
@@ -11,17 +11,16 @@ import { createTodoToggled } from "../../src/domain/todo_toggled.event";
 
 describe("Toggle todo", () => {
   it("should toggle todo", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
-        completed: false,
-      },
-      {
+      }),
+      createTodo({
         id: 2,
         title: "bar",
         completed: true,
-      },
+      }),
     ];
 
     const command = createToggleTodo({ id: 1 });
@@ -31,12 +30,11 @@ describe("Toggle todo", () => {
   });
 
   it("should reject toggle for unknown id", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
-        completed: false,
-      },
+      }),
     ];
 
     const command = createToggleTodo({ id: 2 });

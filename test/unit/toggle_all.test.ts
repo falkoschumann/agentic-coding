@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import type { TodoState } from "../../src/domain/todo.aggregate";
+import { createTodo } from "../../src/domain/todo.aggregate";
 import {
   toggleAll,
   createToggleAll,
@@ -11,17 +11,16 @@ import { createAllToggled } from "../../src/domain/all_toggled.event";
 
 describe("Toggle all", () => {
   it("should toggle all", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
-        completed: false,
-      },
-      {
+      }),
+      createTodo({
         id: 2,
         title: "bar",
         completed: true,
-      },
+      }),
     ];
 
     const command = createToggleAll({ checked: true });

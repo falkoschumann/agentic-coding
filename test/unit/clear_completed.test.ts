@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import type { TodoState } from "../../src/domain/todo.aggregate";
+import { createTodo } from "../../src/domain/todo.aggregate";
 import {
   clearCompleted,
   createClearCompleted,
@@ -11,17 +11,16 @@ import { createCompletedCleared } from "../../src/domain/completed_cleared.event
 
 describe("Clear completed", () => {
   it("should clear completed", () => {
-    const state: TodoState[] = [
-      {
+    const state = [
+      createTodo({
         id: 1,
         title: "foo",
-        completed: false,
-      },
-      {
+      }),
+      createTodo({
         id: 2,
         title: "bar",
         completed: true,
-      },
+      }),
     ];
 
     const command = createClearCompleted();
