@@ -16,6 +16,7 @@ export const config: SheriffConfig = {
     "src/domain/services": ["domain:service"],
     "src/domain/<aggregate>": ["domain:aggregate"],
     "src/infrastructure": ["layer:infrastructure"],
+    "src/shared": ["layer:shared"],
     "src/ui": ["layer:ui", "ui:entry"],
     "src/ui/components": ["layer:ui", "ui:component"],
     "src/ui/layouts": ["layer:ui", "ui:layout"],
@@ -24,7 +25,7 @@ export const config: SheriffConfig = {
   depRules: {
     "layer:entry": ["layer:*"],
     "layer:application": ["layer:infrastructure"],
-    "layer:*": [sameTag, "layer:domain", "domain:*"],
+    "layer:*": [sameTag, "layer:shared", "layer:domain", "domain:*"],
     "domain:read_model": ["domain:aggregate", "domain:service"],
     "domain:service": ["domain:aggregate"],
     "domain:*": [sameTag, "domain:value_object"],
