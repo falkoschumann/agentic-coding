@@ -73,6 +73,7 @@ endif
 else
 	$(PM) install $(PM_OPTIONS)
 endif
+	$(RUN) playwright install
 
 version:
 	@echo "Using runtime $(JS) version $(shell $(JS) --version)"
