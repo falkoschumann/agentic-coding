@@ -6,10 +6,13 @@ rules before writing any code.
 ## Project Overview
 
 - Use domain-driven design using ESDM
-- The domain model is described in `todos/*.esdm.yaml`
-- BDD features are described in `features/*.esdm.yaml`
+- The domain model is described in `todos/todos.esdm.yaml` and
+  `todos/read-models.esdm.yaml`
+- BDD features are described in `features/todo.esdm.yaml` and
+  `features/get-todos.esdm.yaml`
 - Place production code in an hexagonal architecture in `src`
 - Place test code in `tests`
+- Use local storage as persistence (no backend)
 
 ## Build and Test Commands
 
@@ -28,11 +31,12 @@ rules before writing any code.
 - Double quotes
 - Use functional patterns for `src/domain/` and `src/ui/`
 - Use objectional patterns for `src/application/` and `src/infrastructure`
-- Never break the architecture rules:
+- Never break the architecture rules (check with `make check-sheriff`):
     - Each folder in `src/` is allowed to import from same folder, `src/shared`
       and `src/domain`
     - `src/application` is also allowed to import from `src/infrastructure`
     - `src/` is allowed to import from any sub folder
+- Use `make fix` and `make check` to ensure codestyle
 
 ## Testing Instructions
 
@@ -44,3 +48,5 @@ rules before writing any code.
 - When changing code, change only production code or test code, never both, run
   tests before switching the two
 - A feature is completed when all tests and checks are successful
+- Prefer deriving tests directly from scenarios in `src/todo.esdm.yaml` and
+  `src/get-todos.esdm.yaml`
