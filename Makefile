@@ -9,7 +9,7 @@ DEPENDENCY_UPDATER=dependabot[bot]
 all: dist check e2e-tests
 
 clean:
-	rm -rf coverage
+	rm -rf coverage playwright-report test-results
 	rm -rf node_modules/.tmp
 
 distclean: clean
@@ -27,16 +27,35 @@ domain:
 domain-with-details:
 	esdm view --with-details
 
-check: test
+check: test check-esdm check-typing check-eslint check-stylelint check-prettier check-sheriff
+
+check-esdm:
 	esdm lint
+
+check-typing:
+	$(PM) run $(RUN_OPTIONS) tsc -b
+
+check-eslint:
 	$(RUN) $(RUN_OPTIONS) eslint .
+
+check-stylelint:
 	$(RUN) $(RUN_OPTIONS) stylelint "**/*.css" --ignore-path .gitignore
+
+check-prettier:
 	$(RUN) $(RUN_OPTIONS) prettier --check .
+
+check-sheriff:
 	$(RUN) $(RUN_OPTIONS) sheriff verify
 
-fix:
+fix: fix-eslint fix-stylelint fix-prettier
+
+fix-eslint:
 	$(RUN) $(RUN_OPTIONS) eslint --fix .
+
+fix-stylelint:
 	$(RUN) $(RUN_OPTIONS) stylelint "**/*.css" --fix --ignore-path .gitignore
+
+fix-prettier:
 	$(RUN) $(RUN_OPTIONS) prettier --write .
 
 dev: prepare
@@ -58,7 +77,6 @@ e2e-tests: prepare
 	$(RUN) $(RUN_OPTIONS) playwright test
 
 build: prepare
-	$(PM) run $(RUN_OPTIONS) tsc -b
 	$(PM) run $(RUN_OPTIONS) vite build
 
 prepare: version
@@ -84,6 +102,7 @@ version:
 	all clean distclean dist \
 	start \
 	domain domain-with-details \
-	check fix \
+	check check-esdm check-typing check-eslint check-stylelint check-prettier check-sheriff \
+	fix fix-eslint fix-stylelint fix-prettier \
 	dev test watch unit-tests integration-tests e2e-tests \
 	build prepare version

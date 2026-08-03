@@ -1,3 +1,3 @@
-# Agentic coding
+# Todos
 
-A playground for agentic coding implementing a todo app.
+Manages a to-do list.

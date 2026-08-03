@@ -6,14 +6,8 @@
   "author": "Falko Schumann",
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "start": "vite preview",
-    "test": "vitest run",
-    "test:e2e": "playwright test",
-    "build": "tsc -b && vite build",
-    "lint": "eslint . && stylelint \"**/*.css\" --ignore-path .gitignore && prettier --check .",
-    "lint:fix": "eslint --fix . && stylelint \"**/*.css\" --fix --ignore-path .gitignore && prettier --write .",
-    "lint:arch": "sheriff verify"
+    "test": "vitest run"
   },
   "dependencies": {
     "bootstrap": "5.3.8",
