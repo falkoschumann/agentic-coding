@@ -1,28 +1,50 @@
 # Agent Instructions
 
-Read the `PROJECT.md` first to understand the current state and architecture
-rules before writing any code.
-
 ## Project Overview
 
-- Use domain-driven design using ESDM
-- The domain model is described in `todos/todos.esdm.yaml` and
-  `todos/read-models.esdm.yaml`
-- BDD features are described in `features/todo.esdm.yaml` and
-  `features/get-todos.esdm.yaml`
-- Place production code in an hexagonal architecture in `src`
-- Place test code in `tests`
-- Use local storage as persistence (no backend)
+- Project vision: As a user, I want to manage a to-do list, so that I have an
+  overview of tasks to be done and completed tasks.
+- Use domain-driven design with ESDM
+- The domain model is described as ESDM in `todos/` with schema
+  `schemas/core/v1.yaml`
+- BDD features are described as ESDM in `features/` with schema
+  `schemas/given-when-then/v1.yaml`
+- Place production code in an hexagonal architecture in `src`:
+    - `src/application/`: application services
+    - `src/domain/`: domain code
+    - `src/infrastructure/`: infrastructure code
+    - `src/ui/`: UI code
+    - `src/shared/`: shared code for cross functional features
+- Place test code in `tests`:
+    - `tests/unit/`: unit tests
+    - `tests/integration/`: integration tests
+    - `tests/e2e/`: end-to-end tests and UI tests
+    - `tests/data/`: test data
+
+## Tech Stack
+
+- **Frontend:** React 19, React Router 8, TypeScript
+- **Backend:** there is no backend, use local storage as persistence
+- **Patterns:** domain-driven design, message-driven
+- **Styling:** Bootstrap, Bootstrap Icons
+- **Build:** make, bun, Vite
+- **Testing:** Vitest, Playwright
+- **Linting & Formatting:** ESLint, Stylelint, Prettier, Sheriff
 
 ## Build and Test Commands
 
 - `make`: run the full build including tests and checks
+- `make build`: build the app without tests and checks
 - `make test`: run all tests
 - `bun run test -- {filter}`: run one or more tests with a filter (vitest)
 - `make e2e-tests`: run all end-to-end tests (playwright)
 - `make check`: run all checks (linting, formatting, architecture rules)
-- `make fix`: try to fix issues found by `make check`; run `make fix` first and
-  re-check with `make check` before fix issues manually
+- `make check-esdm`, `make check-typing`, `make check-eslint`,
+  `make check-stylelint`, `make check-prettier` or `make check-sheriff`: run a
+  specific check
+- `make fix`: try to fix issues found by `make check`
+- `make fix-eslint`, `make fix-stylelint` or `make fix-prettier`: fix a specific
+  issue
 
 ## Code Style Guidelines
 
