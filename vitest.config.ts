@@ -9,6 +9,7 @@ export default defineConfig({
         "src/**/application/**/*",
         "src/**/domain/**/*",
         "src/**/infrastructure/**/*",
+        "src/**/shared/**/*",
         // exclude layers UI and root
       ],
       provider: "istanbul",
@@ -19,7 +20,7 @@ export default defineConfig({
       },
     },
     environment: "jsdom",
-    exclude: ["**/node_modules/**", "**/dist/**", "**/test/e2e/**"],
+    exclude: ["**/node_modules/**", "**/dist/**", "**/tests/e2e/**"],
     outputFile: "coverage/junit.xml",
     reporters: ["junit", "tree"],
     passWithNoTests: true,

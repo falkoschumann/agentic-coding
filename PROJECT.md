@@ -30,10 +30,10 @@ be done and completed tasks.
 - `src/ui/components/`: shared UI components
 - `src/ui/layouts/`: reusable UI layouts
 - `src/ui/pages/`: UI pages and helpers in a subfolder per page
-- `test/unit/`: unit tests
-- `test/integration/`: integration tests
-- `test/e2e/`: end-to-end tests and UI tests
-- `test/data/`: test data used by the integration tests
+- `tests/unit/`: unit tests
+- `tests/integration/`: integration tests
+- `tests/e2e/`: end-to-end tests and UI tests
+- `tests/data/`: test data used by the integration tests
 
 ## Important Commands
 
