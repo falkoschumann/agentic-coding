@@ -1,5 +1,7 @@
 // Copyright (c) 2026 Falko Schumann. All rights reserved. MIT license.
 
+import type { Log } from "./log";
+
 export type Event<TData = unknown> = Readonly<{ type: string; data: TData }>;
 
 export type EventHandler<TMessage extends Event = Event> = (
@@ -7,16 +9,20 @@ export type EventHandler<TMessage extends Event = Event> = (
 ) => void;
 
 export class EventBus {
+  static create({
+    cacheSize = 100,
+    log,
+  }: { cacheSize?: number; log?: Log } = {}) {
+    return new EventBus(cacheSize, log);
+  }
+
   readonly #cacheSize;
   readonly #log;
 
   #handlers: EventHandler<Event>[] = [];
   readonly #events: Event[] = [];
 
-  constructor({
-    cacheSize = 100,
-    log,
-  }: { cacheSize?: number; log?: Console } = {}) {
+  constructor(cacheSize: number, log?: Log) {
     this.#cacheSize = cacheSize;
     this.#log = log;
   }

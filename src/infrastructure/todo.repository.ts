@@ -21,4 +21,8 @@ export class TodoRepository {
 
     return JSON.parse(todosJson) as TodoState[];
   }
+
+  async clear(): Promise<void> {
+    localStorage.removeItem(STORAGE_KEY);
+  }
 }

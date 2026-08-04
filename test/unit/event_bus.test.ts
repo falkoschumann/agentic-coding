@@ -6,7 +6,7 @@ import { EventBus, type Event } from "../../src/shared/event_bus";
 
 describe("Event bus", () => {
   it("should deliver published events to functional subscriber", () => {
-    const bus = new EventBus();
+    const bus = EventBus.create();
     const events: (FooMessage | BarMessage)[] = [];
     const memorize = (event: FooMessage | BarMessage) => {
       events.push(event);
@@ -20,7 +20,7 @@ describe("Event bus", () => {
   });
 
   it("should ignore handler errors", () => {
-    const bus = new EventBus();
+    const bus = EventBus.create();
     const events: Event[] = [];
     bus.subscribe(() => {
       throw new Error("foobar");
@@ -33,7 +33,7 @@ describe("Event bus", () => {
   });
 
   it("should unsubscribe", () => {
-    const bus = new EventBus();
+    const bus = EventBus.create();
     const events: Event[] = [];
     const unsubscribe = bus.subscribe((event) => events.push(event));
 
@@ -45,7 +45,7 @@ describe("Event bus", () => {
   });
 
   it("should cache events", () => {
-    const bus = new EventBus();
+    const bus = EventBus.create();
 
     bus.publish(new FooMessage());
     bus.publish(new BarMessage());
@@ -54,7 +54,7 @@ describe("Event bus", () => {
   });
 
   it("should discard old events when cache size is exceeded", () => {
-    const bus = new EventBus({ cacheSize: 1 });
+    const bus = EventBus.create({ cacheSize: 1 });
 
     bus.publish(new FooMessage());
     bus.publish(new BarMessage());

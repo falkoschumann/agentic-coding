@@ -1,17 +1,24 @@
 // Copyright (c) 2026 Falko Schumann. All rights reserved. MIT license.
 
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 
-import { createTodo, type TodoState } from "../../src/domain/todo.aggregate";
+import { GetTodosQueryHandler } from "../../src/application/get_todos.query_handler";
+import { createTodo } from "../../src/domain/todo.aggregate";
 import {
   createGetTodosQuery,
   createGetTodosQueryResult,
-  getTodos,
 } from "../../src/domain/get_todos.query";
+import { TodoRepository } from "../../src/infrastructure/todo.repository";
 
 describe("Get todos", () => {
-  it("should show all todos", () => {
-    const state = [
+  beforeEach(() => {
+    const repository = TodoRepository.create();
+    repository.clear();
+  });
+
+  it("should show all todos", async () => {
+    const { handler, todoRepository } = configure();
+    await todoRepository.store([
       createTodo({
         id: 1,
         title: "a",
@@ -26,22 +33,38 @@ describe("Get todos", () => {
         id: 3,
         title: "c",
       }),
-    ];
+    ]);
 
     const query = createGetTodosQuery({ showing: "all" });
-    const result = getTodos(state, query);
+    const result = await handler.handle(query);
 
     expect(result).toEqual(
       createGetTodosQueryResult({
-        todos: state,
+        todos: [
+          createTodo({
+            id: 1,
+            title: "a",
+            completed: true,
+          }),
+          createTodo({
+            id: 2,
+            title: "b",
+            completed: true,
+          }),
+          createTodo({
+            id: 3,
+            title: "c",
+          }),
+        ],
         activeTodoCount: 1,
         completedCount: 2,
       }),
     );
   });
 
-  it("should show active todos", () => {
-    const state = [
+  it("should show active todos", async () => {
+    const { handler, todoRepository } = configure();
+    await todoRepository.store([
       createTodo({
         id: 1,
         title: "a",
@@ -56,10 +79,10 @@ describe("Get todos", () => {
         id: 3,
         title: "c",
       }),
-    ];
+    ]);
 
     const query = createGetTodosQuery({ showing: "active" });
-    const result = getTodos(state, query);
+    const result = await handler.handle(query);
 
     expect(result).toEqual(
       createGetTodosQueryResult({
@@ -76,8 +99,9 @@ describe("Get todos", () => {
     );
   });
 
-  it("should show completed todos", () => {
-    const state = [
+  it("should show completed todos", async () => {
+    const { handler, todoRepository } = configure();
+    await todoRepository.store([
       createTodo({
         id: 1,
         title: "a",
@@ -92,10 +116,10 @@ describe("Get todos", () => {
         id: 3,
         title: "c",
       }),
-    ];
+    ]);
 
     const query = createGetTodosQuery({ showing: "completed" });
-    const result = getTodos(state, query);
+    const result = await handler.handle(query);
 
     expect(result).toEqual(
       createGetTodosQueryResult({
@@ -117,12 +141,18 @@ describe("Get todos", () => {
     );
   });
 
-  it("should return no todos when none exist", () => {
-    const state: TodoState[] = [];
+  it("should return no todos when none exist", async () => {
+    const { handler } = configure();
 
     const query = createGetTodosQuery({ showing: "all" });
-    const result = getTodos(state, query);
+    const result = await handler.handle(query);
 
     expect(result).toEqual(createGetTodosQueryResult());
   });
 });
+
+function configure() {
+  const todoRepository = TodoRepository.create();
+  const handler = GetTodosQueryHandler.create({ todoRepository });
+  return { handler, todoRepository };
+}

@@ -25,7 +25,7 @@ export function createTodo({
   return { id, title, completed };
 }
 
-export type TodoEvents =
+export type TodoEvent =
   | AllToggledEvent
   | CompletedClearedEvent
   | TodoAddedEvent
