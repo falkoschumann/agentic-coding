@@ -2,12 +2,32 @@
 
 export type Message<TData = unknown> = Readonly<{ type: string; data: TData }>;
 
-export type MessageHandler<
+export type MessageHandlerFunction<
   TMessage extends Message = Message,
   TResponse = unknown,
 > = (message: TMessage) => TResponse;
 
+export type MessageHandlerObject<
+  TMessage extends Message = Message,
+  TResponse = unknown,
+> = {
+  handle(message: TMessage): TResponse;
+};
+
+export type MessageHandler<
+  TMessage extends Message = Message,
+  TResponse = unknown,
+> =
+  | MessageHandlerFunction<TMessage, TResponse>
+  | MessageHandlerObject<TMessage, TResponse>;
+
 export class MessageRouter {
+  static create() {
+    return new MessageRouter();
+  }
+
+  private constructor() {}
+
   #routing = new Map<string, MessageHandler>();
 
   register(type: string, handler: MessageHandler) {
@@ -22,6 +42,10 @@ export class MessageRouter {
       );
     }
 
-    return (await handler(message)) as TResponse;
+    if (typeof handler === "function") {
+      return (await handler(message)) as TResponse;
+    } else {
+      return (await handler.handle(message)) as TResponse;
+    }
   }
 }

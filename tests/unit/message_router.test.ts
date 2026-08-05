@@ -6,7 +6,7 @@ import { MessageRouter } from "../../src/shared/message_router";
 
 describe("Message router", () => {
   it("should route message to message handler function", async () => {
-    const router = new MessageRouter();
+    const router = MessageRouter.create();
     router.register("my-message", (message) => message.data);
 
     const response = await router.route({
@@ -17,8 +17,22 @@ describe("Message router", () => {
     expect(response).toEqual("my-payload");
   });
 
+  it("should route message to message handler object", async () => {
+    const router = MessageRouter.create();
+    router.register("my-message", {
+      handle: (message) => message.data,
+    });
+
+    const response = await router.route({
+      type: "my-message",
+      data: "my-payload",
+    });
+
+    expect(response).toEqual("my-payload");
+  });
+
   it("should route message to the right message handler", async () => {
-    const router = new MessageRouter();
+    const router = MessageRouter.create();
     router.register("message-1", () => ({ value: "message-1" }));
     router.register("message-2", () => ({ value: "message-2" }));
 
@@ -28,7 +42,7 @@ describe("Message router", () => {
   });
 
   it("should throw exception when message handler is not registered", async () => {
-    const router = new MessageRouter();
+    const router = MessageRouter.create();
     router.register("my-message", (message) => message.data);
 
     const factory = () =>

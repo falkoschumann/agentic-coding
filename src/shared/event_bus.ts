@@ -4,8 +4,8 @@ import type { Log } from "./log";
 
 export type Event<TData = unknown> = Readonly<{ type: string; data: TData }>;
 
-export type EventHandler<TMessage extends Event = Event> = (
-  message: TMessage,
+export type EventHandler<TEvent extends Event = Event> = (
+  event: TEvent,
 ) => void;
 
 export class EventBus {
@@ -22,12 +22,12 @@ export class EventBus {
   #handlers: EventHandler<Event>[] = [];
   readonly #events: Event[] = [];
 
-  constructor(cacheSize: number, log?: Log) {
+  private constructor(cacheSize: number, log?: Log) {
     this.#cacheSize = cacheSize;
     this.#log = log;
   }
 
-  subscribe<TMessage extends Event>(handler: EventHandler<TMessage>) {
+  subscribe<TEvent extends Event>(handler: EventHandler<TEvent>) {
     this.#handlers = [...this.#handlers, handler as EventHandler<Event>];
     return () => {
       this.#handlers = this.#handlers.filter((h) => h !== handler);
