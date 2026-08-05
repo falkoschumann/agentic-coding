@@ -15,8 +15,7 @@
     "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
     // Modules
-    "allowArbitraryExtensions": true,
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
     "module": "esnext",
     "moduleResolution": "bundler",
     "noUncheckedSideEffectImports": true,
