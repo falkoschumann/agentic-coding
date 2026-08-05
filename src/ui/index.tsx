@@ -34,7 +34,7 @@ function App() {
             </label>
             <button type="button" className="btn-close float-end ms-2"></button>
           </li>
-          <li className="list-group-item d-flex align-items-center">
+          <li className="list-group-item d-flex align-items-center py-1">
             <input className="form-check-input me-2" type="checkbox" id="todo-3" />
             <input className="form-control form-control-sm" type="text" defaultValue="edit me" />
             <button type="button" className="btn-close float-end ms-2"></button>
